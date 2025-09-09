@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systems Thinking for Civil Service Leaders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .menu {
+            list-style: none;
+        }
+        
+        .menu-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-button {
+            width: 100%;
+            padding: 1rem;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .menu-button:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .menu-button.active {
+            background-color: #dbeafe;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+        
+        .menu-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        .submenu {
+            list-style: none;
+            background-color: #f9fafb;
+            display: none;
+        }
+        
+        .submenu.active {
+            display: block;
+        }
+        
+        .submenu-item {
+            padding: 0.5rem 1rem 0.5rem 3rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+        
+        .submenu-item:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .submenu-item.active {
+            background-color: #dbeafe;
+            color: #1e3a8a;
+            font-weight: 500;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content h2 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .content h3 {
+            color: #1e40af;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .content h4 {
+            color: #374151;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+        
+        .content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .tip-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .warning-box {
+            background: #fef3cd;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .progress-indicator {
+            background: #e5e7eb;
+            height: 4px;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Systems Thinking for Civil Service Leaders</h1>
+            <p>A Practical Teaching Resource Pack</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-layout">
+            <aside class="sidebar">
+                <nav>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <button class="menu-button active" data-section="overview">
+                                <span><span class="menu-icon">📋</span>Overview</span>
+                            </button>
+                        </li>
+                        <li class="menu-item">
+                            <button class="menu-button" data-toggle="foundations">
+                                <span><span class="menu-icon">🧠</span>Foundations</span>
+                                <span>▼</span>
+                            </button>
+                            <ul class="submenu" id="foundations">
+                                <li class="submenu-item" data-section="what-is-systems">What is Systems Thinking?</li>
+                                <li class="submenu-item" data-section="why-matters">Why It Matters</li>
+                                <li class="submenu-item" data-section="key-principles">Key Principles</li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <button class="menu-button" data-toggle="skills">
+                                <span><span class="menu-icon">🎯</span>Skill Development</span>
+                                <span>▼</span>
+                            </button>
+                            <ul class="submenu" id="skills">
+                                <li class="submenu-item" data-section="perspective">Expanding Perspective</li>
+                                <li class="submenu-item" data-section="connections">Thinking in Connections</li>
+                                <li class="submenu-item" data-section="mental-models">Challenging Mental Models</li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <button class="menu-button" data-toggle="leadership">
+                                <span><span class="menu-icon">👥</span>Systems Leadership</span>
+                                <span>▼</span>
+                            </button>
+                            <ul class="submenu" id="leadership">
+                                <li class="submenu-item" data-section="attributes">Leadership Attributes</li>
+                                <li class="submenu-item" data-section="development">Development Steps</li>
+                                <li class="submenu-item" data-section="pitfalls">Common Pitfalls</li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <button class="menu-button" data-toggle="resources">
+                                <span><span class="menu-icon">📚</span>Teaching Resources</span>
+                                <span>▼</span>
+                            </button>
+                            <ul class="submenu" id="resources">
+                                <li class="submenu-item" data-section="activities">Learning Activities</li>
+                                <li class="submenu-item" data-section="discussions">Discussion Points</li>
+                                <li class="submenu-item" data-section="reflection">Reflection Questions</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <div class="progress-indicator">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <!-- Overview Section -->
+                <section class="content-section active" id="overview">
+                    <h2>Welcome to Systems Thinking for Civil Service Leaders</h2>
+                    
+                    <div class="highlight-box">
+                        <h3>About This Resource Pack</h3>
+                        <p>This interactive teaching resource is designed for middle to senior level civil servants who want to understand and apply systems thinking in their leadership roles. The materials are practical, accessible, and focused on developing mindsets rather than completing technical exercises.</p>
+                    </div>
+                    
+                    <h3>How to Use This Resource</h3>
+                    <p>This pack is structured as both a self-directed learning tool and a teaching resource for workshops and training sessions. Each section builds upon previous concepts while remaining accessible as standalone modules.</p>
+                    
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><strong>Foundations:</strong> Core concepts and principles of systems thinking</li>
+                        <li><strong>Skill Development:</strong> Practical approaches to developing systems thinking capabilities</li>
+                        <li><strong>Systems Leadership:</strong> Leadership attributes and development pathways</li>
+                        <li><strong>Teaching Resources:</strong> Activities, discussion points, and reflection questions for educators</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Teaching Tip</h4>
+                        <p>Start with the "Why It Matters" section to establish relevance, then explore specific skills and attributes based on your audience's needs and experience level.</p>
+                    </div>
+                    
+                    <h3>Learning Objectives</h3>
+                    <p>By the end of this resource, participants will be able to:</p>
+                    <ul>
+                        <li>Explain what systems thinking is and why it matters for public service</li>
+                        <li>Identify opportunities to apply systems thinking in their current role</li>
+                        <li>Develop key attributes of systems leadership</li>
+                        <li>Recognize and avoid common pitfalls in systems approaches</li>
+                    </ul>
+                </section>
+
+                <!-- Foundations Sections -->
+                <section class="content-section" id="what-is-systems">
+                    <h2>What is Systems Thinking?</h2>
+                    
+                    <p>Systems thinking is a way of understanding and working with complexity that recognises the interconnected nature of challenges facing government. Rather than focusing solely on individual problems or isolated solutions, systems thinking looks at the relationships, patterns, and structures that create the outcomes we observe.</p>
+                    
+                    <div class="highlight-box">
+                        <h3>In the Civil Service Context</h3>
+                        <p>This means recognising that policy challenges rarely exist in isolation. Housing shortages connect to transport planning, education outcomes, health inequalities, and economic development. Climate change intersects with agriculture, urban planning, public health, and social justice.</p>
+                    </div>
+                    
+                    <h3>Systems vs Linear Thinking</h3>
+                    <h4>Linear Thinking Asks:</h4>
+                    <ul>
+                        <li>What's the problem?</li>
+                        <li>What caused it?</li>
+                        <li>How do we fix it?</li>
+                        <li>Who's responsible?</li>
+                    </ul>
+                    
+                    <h4>Systems Thinking Asks:</h4>
+                    <ul>
+                        <li>What patterns do we see over time?</li>
+                        <li>What relationships create these outcomes?</li>
+                        <li>How might solutions interact with the broader system?</li>
+                        <li>What role do we play in creating current results?</li>
+                    </ul>
+                </section>
+
+                <section class="content-section" id="why-matters">
+                    <h2>Why Systems Thinking Matters</h2>
+                    
+                    <h3>Traditional Approaches Often Fail Because They:</h3>
+                    <ul>
+                        <li>Address symptoms rather than root causes</li>
+                        <li>Create unintended consequences</li>
+                        <li>Generate short-term fixes that worsen long-term problems</li>
+                        <li>Waste resources through duplicated efforts</li>
+                        <li>Miss opportunities for integrated solutions</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h3>Systems Thinking Enables You To:</h3>
+                        <ul>
+                            <li><strong>See the bigger picture</strong> while understanding your role within it</li>
+                            <li><strong>Anticipate unintended consequences</strong> before they occur</li>
+                            <li><strong>Find leverage points</strong> where small changes create large improvements</li>
+                            <li><strong>Build coalitions</strong> across departments and sectors</li>
+                            <li><strong>Design policies</strong> that work with, rather than against, system dynamics</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Real-World Examples</h3>
+                    <h4>Housing Policy Example</h4>
+                    <p><strong>Linear approach:</strong> Build more houses to solve housing shortage.</p>
+                    <p><strong>Systems approach:</strong> Consider how housing connects to transport, schools, employment, infrastructure capacity, and community services. Recognise that simply building houses without considering these connections might create new problems.</p>
+                    
+                    <h4>Skills Training Example</h4>
+                    <p><strong>Linear approach:</strong> Provide more training courses to address skills gaps.</p>
+                    <p><strong>Systems approach:</strong> Examine why skills gaps persist despite existing training. Consider employer needs, training quality, accessibility, career pathways, and economic incentives that might discourage skill development.</p>
+                </section>
+
+                <section class="content-section" id="key-principles">
+                    <h2>Key Principles of Systems Thinking</h2>
+                    
+                    <div class="highlight-box">
+                        <h3>🔗 Interconnectedness</h3>
+                        <p>Everything is connected to everything else. Changes in one part of the system ripple through to other parts, often in unexpected ways.</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🎯 Purpose</h3>
+                        <p>Every system exists for a purpose, though this may not always be explicit. Sometimes the real purpose differs from the stated purpose.</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🏗️ Structure Drives Behaviour</h3>
+                        <p>How a system is organised determines what it produces. If you want different outcomes, you often need to change the structure.</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🧠 Mental Models Matter</h3>
+                        <p>Our assumptions and beliefs shape what we see and how we act. Changing outcomes often requires changing how we think about the system.</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>⚖️ Leverage Points Exist</h3>
+                        <p>Small changes in the right place can produce significant improvements. The art is finding where to push.</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Practical Application</h4>
+                        <p>When facing any challenge, ask yourself: "What principle might be most relevant here?" This helps shift from reactive problem-solving to thoughtful system intervention.</p>
+                    </div>
+                </section>
+
+                <!-- Skills Development Sections -->
+                <section class="content-section" id="perspective">
+                    <h2>Expanding Your Perspective</h2>
+                    
+                    <h3>Practice Asking Different Questions</h3>
+                    
+                    <h4>Instead of asking...</h4>
+                    <div class="warning-box">
+                        <ul>
+                            <li>"How do we solve this problem?"</li>
+                            <li>"Who is to blame?"</li>
+                            <li>"What's the quick fix?"</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Try asking...</h4>
+                    <div class="tip-box">
+                        <ul>
+                            <li>"What is this problem a symptom of?"</li>
+                            <li>"What about our system produces this outcome?"</li>
+                            <li>"What would a sustainable solution look like?"</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Develop Pattern Recognition</h3>
+                    <p>Start noticing patterns in your daily work:</p>
+                    <ul>
+                        <li>Look for recurring themes across different policy areas</li>
+                        <li>Notice when the same issues keep arising despite repeated interventions</li>
+                        <li>Identify situations where actions create reactions that either reinforce or balance the original action</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h3>Pattern Recognition in Practice</h3>
+                        <p><strong>Example:</strong> If multiple departments keep reporting similar implementation challenges, this might indicate a systemic issue with how policies are designed or communicated, rather than individual departmental failures.</p>
+                    </div>
+                    
+                    <h3>Zoom In and Zoom Out</h3>
+                    <p>Practice shifting between different levels of perspective:</p>
+                    <ul>
+                        <li><strong>Zoom in:</strong> What's happening right here, right now?</li>
+                        <li><strong>Zoom out:</strong> What patterns emerge over time?</li>
+                        <li><strong>Zoom further out:</strong> What structures and systems create these patterns?</li>
+                    </ul>
+                </section>
+
+                <section class="content-section" id="connections">
+                    <h2>Thinking in Connections</h2>
+                    
+                    <h3>Broaden Your View of Who Matters</h3>
+                    <p>When facing any policy issue, naturally extend your thinking beyond the obvious players. Who else might be affected? Who has informal influence? Often the most important relationships aren't the ones on the organisational chart.</p>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Quick Practice</h4>
+                        <p>For your current project, spend two minutes listing everyone who might be affected by or could influence the outcome. Include people outside government, informal influencers, and those who might be affected indirectly.</p>
+                    </div>
+                    
+                    <h3>Follow the Ripple Effects</h3>
+                    <p>Get into the habit of asking "and then what happens?" When you're considering a policy change, mentally trace through how it might play out. What might it trigger in other departments? How might people respond in ways you didn't anticipate?</p>
+                    
+                    <h4>Example: Ripple Effect Thinking</h4>
+                    <div class="highlight-box">
+                        <p><strong>Policy:</strong> Increase minimum wage</p>
+                        <p><strong>Direct effect:</strong> Workers earn more money</p>
+                        <p><strong>And then what happens?</strong></p>
+                        <ul>
+                            <li>Some businesses might reduce hours or staff</li>
+                            <li>Others might raise prices</li>
+                            <li>Some might invest in automation</li>
+                            <li>Consumer spending might change</li>
+                            <li>Demand for social services might shift</li>
+                        </ul>
+                        <p><strong>The insight:</strong> Supporting low-wage workers might require coordinated policies across employment, business support, and social services.</p>
+                    </div>
+                    
+                    <h3>Notice When Things Push Back</h3>
+                    <p>Pay attention to patterns where good intentions meet resistance or create unexpected results. Sometimes this resistance tells you something important about how the system really works, not how you think it should work.</p>
+                    
+                    <p>When change efforts keep hitting the same obstacles, the obstacle might be the message about what needs to change in the system structure.</p>
+                </section>
+
+                <section class="content-section" id="mental-models">
+                    <h2>Challenging Mental Models</h2>
+                    
+                    <h3>Examine Your Assumptions</h3>
+                    <p>We all carry assumptions about how things work. These mental models shape what we notice, how we interpret events, and what solutions we consider.</p>
+                    
+                    <h4>Questions for Self-Reflection:</h4>
+                    <ul>
+                        <li>What beliefs do I hold about how government works?</li>
+                        <li>Where did these beliefs come from?</li>
+                        <li>What evidence might challenge these assumptions?</li>
+                        <li>What am I not seeing because of my current perspective?</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <h4>⚠️ Common Mental Model Traps</h4>
+                        <ul>
+                            <li><strong>"People resist change"</strong> → Maybe they resist poorly designed change</li>
+                            <li><strong>"We need better communication"</strong> → Maybe we need better listening</li>
+                            <li><strong>"More data will solve this"</strong> → Maybe we need better sense-making</li>
+                            <li><strong>"Someone should be accountable"</strong> → Maybe the system makes success difficult</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Seek Diverse Perspectives</h3>
+                    <p>Actively look for viewpoints that challenge your current thinking:</p>
+                    <ul>
+                        <li>Regularly engage with stakeholders from different backgrounds</li>
+                        <li>Listen to frontline staff who see system effects directly</li>
+                        <li>Include voices that are often marginalised in policy discussions</li>
+                        <li>Ask people to disagree with you constructively</li>
+                    </ul>
+                    
+                    <h3>Test Your Thinking</h3>
+                    <p>Build habits that help you question your assumptions:</p>
+                    <ul>
+                        <li>Use "what if" scenarios to stress-test your understanding</li>
+                        <li>Look for disconfirming evidence</li>
+                        <li>Ask "What would have to be true for this opposite view to make sense?"</li>
+                        <li>Be willing to change your mind when new information emerges</li>
+                    </ul>
+                </section>
+
+                <!-- Leadership Sections -->
+                <section class="content-section" id="attributes">
+                    <h2>Attributes of Systems Leaders</h2>
+                    
+                    <div class="highlight-box">
+                        <h3>🔍 Systems Awareness</h3>
+                        <ul>
+                            <li><strong>Sees connections</strong> between different policy areas and organisational functions</li>
+                            <li><strong>Understands emergence</strong> - how system behaviour arises from interactions between parts</li>
+                            <li><strong>Recognises patterns</strong> across time and different contexts</li>
+                            <li><strong>Appreciates complexity</strong> without being overwhelmed by it</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🤝 Collaborative Leadership</h3>
+                        <ul>
+                            <li><strong>Works across boundaries</strong> - departmental, sectoral, and hierarchical</li>
+                            <li><strong>Builds networks</strong> of relationships that enable collective action</li>
+                            <li><strong>Facilitates dialogue</strong> between different perspectives and interests</li>
+                            <li><strong>Shares power</strong> appropriately to enable system-wide solutions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🎯 Adaptive Capacity</h3>
+                        <ul>
+                            <li><strong>Comfortable with uncertainty</strong> and ambiguous situations</li>
+                            <li><strong>Learns from failure</strong> and treats setbacks as learning opportunities</li>
+                            <li><strong>Experiments safely</strong> with small-scale pilots before full implementation</li>
+                            <li><strong>Adjusts course</strong> based on feedback and changing circumstances</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>⏳ Long-term Orientation</h3>
+                        <ul>
+                            <li><strong>Balances short and long-term thinking</strong> in decision-making</li>
+                            <li><strong>Invests in system health</strong> even when benefits aren't immediately visible</li>
+                            <li><strong>Considers intergenerational impacts</strong> of policy decisions</li>
+                            <li><strong>Builds sustainable solutions</strong> rather than quick fixes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>🪞 Reflective Practice</h3>
+                        <ul>
+                            <li><strong>Regularly examines</strong> their own role in creating system outcomes</li>
+                            <li><strong>Seeks feedback</strong> actively from multiple sources</li>
+                            <li><strong>Questions assumptions</strong> and mental models</li>
+                            <li><strong>Commits to continuous learning</strong> and development</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="content-section" id="development">
+                    <h2>Practical Development Steps</h2>
+                    
+                    <h3>Start with Self-Awareness</h3>
+                    <ol>
+                        <li><strong>Reflect on your current approach:</strong> How do you typically tackle complex problems?</li>
+                        <li><strong>Identify your blind spots:</strong> What perspectives or stakeholders do you consistently overlook?</li>
+                        <li><strong>Examine your mental models:</strong> What assumptions guide your thinking about how government works?</li>
+                    </ol>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Self-Assessment Questions</h4>
+                        <ul>
+                            <li>When facing a problem, do I immediately look for someone to blame or something to fix?</li>
+                            <li>Do I regularly seek out perspectives that challenge my thinking?</li>
+                            <li>Am I comfortable not having all the answers?</li>
+                            <li>Do I consider how my actions might create unintended consequences?</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Expand Your Learning</h3>
+                    <ul>
+                        <li><strong>Read broadly</strong> beyond your immediate policy area</li>
+                        <li><strong>Attend cross-departmental meetings</strong> and forums</li>
+                        <li><strong>Engage with academic research</strong> and think tanks working on systems approaches</li>
+                        <li><strong>Learn from other sectors</strong> - what can business, NGOs, or international examples teach?</li>
+                    </ul>
+                    
+                    <h3>Practice Systems Approaches</h3>
+                    <ul>
+                        <li><strong>Start small</strong> with low-stakes situations to practice systems thinking</li>
+                        <li><strong>Choose one complex issue</strong> you're working on and spend time understanding all the connections</li>
+                        <li><strong>Run a pre-mortem</strong> on a policy proposal - what could go wrong and why?</li>
+                        <li><strong>Design small experiments</strong> to test assumptions before full implementation</li>
+                    </ul>
+                    
+                    <h3>Build Your Network</h3>
+                    <ul>
+                        <li><strong>Cultivate relationships</strong> across departments and sectors</li>
+                        <li><strong>Create informal learning groups</strong> with peers interested in systems approaches</li>
+                        <li><strong>Mentor others</strong> in systems thinking approaches</li>
+                        <li><strong>Engage with external stakeholders</strong> regularly to understand system effects</li>
+                    </ul>
+                    
+                    <h3>Embed Systems Thinking in Your Work</h3>
+                    <ul>
+                        <li><strong>Use systems questions</strong> in meetings and policy discussions</li>
+                        <li><strong>Advocate for cross-departmental solutions</strong> when appropriate</li>
+                        <li><strong>Include systems thinking</strong> in team development and training</li>
+                        <li><strong>Measure system health</strong> alongside specific outcomes</li>
+                    </ul>
+                </section>
+
+                <section class="content-section" id="pitfalls">
+                    <h2>Common Pitfalls to Avoid</h2>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Analysis Paralysis</h3>
+                        <p>Don't let the complexity prevent action - start somewhere and learn as you go. Perfect understanding isn't required before taking action.</p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Silver Bullet Thinking</h3>
+                        <p>Resist the urge to find the one perfect solution - sustainable change usually requires multiple interventions working together over time.</p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Ignoring Culture and Politics</h3>
+                        <p>Technical solutions that don't account for human behaviour and political realities often fail. Systems include people, and people have emotions, interests, and motivations.</p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Working in Isolation</h3>
+                        <p>Systems change requires collective action - you can't do it alone. Build coalitions and partnerships early in the process.</p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h3>⚠️ Impatience</h3>
+                        <p>Systems change takes time - maintain focus on long-term transformation while delivering short-term progress. Celebrate small wins along the way.</p>
+                    </div>
+                    
+                    <h3>How to Avoid These Pitfalls</h3>
+                    <ul>
+                        <li><strong>Set learning goals,</strong> not just outcome goals</li>
+                        <li><strong>Start with small experiments</strong> that test key assumptions</li>
+                        <li><strong>Engage stakeholders</strong> in designing solutions, not just implementing them</li>
+                        <li><strong>Build in regular review points</strong> to adjust course based on what you're learning</li>
+                        <li><strong>Communicate progress</strong> in ways that maintain momentum and support</li>
+                    </ul>
+                </section>
+
+                <!-- Teaching Resources Sections -->
+                <section class="content-section" id="activities">
+                    <h2>Learning Activities</h2>
+                    
+                    <h3>Individual Reflection Activities</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Activity 1: Systems Stories (15 minutes)</h4>
+                        <p><strong>Purpose:</strong> Develop pattern recognition and systems awareness</p>
+                        <p><strong>Instructions:</strong> Think of a recurring problem in your organisation. Write a brief story describing not just what happens, but the patterns you notice over time. What keeps the problem coming back?</p>
+                        <p><strong>Debrief:</strong> What does this pattern tell you about the underlying system?</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h4>Activity 2: Ripple Effect Mapping (20 minutes)</h4>
+                        <p><strong>Purpose:</strong> Practice thinking in connections</p>
+                        <p><strong>Instructions:</strong> Choose a policy change you're currently considering. Write it in the centre of a page. Around it, write all the potential effects you can think of - direct and indirect, intended and unintended. Draw lines showing connections.</p>
+                        <p><strong>Debrief:</strong> Which effects surprised you? What connections hadn't you considered before?</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h4>Activity 3: Assumption Testing (10 minutes)</h4>
+                        <p><strong>Purpose:</strong> Challenge mental models</p>
+                        <p><strong>Instructions:</strong> Write down three assumptions you hold about a current challenge. For each assumption, write: "What if the opposite were true?" Explore what that would mean.</p>
+                        <p><strong>Debrief:</strong> How might these alternative perspectives change your approach?</p>
+                    </div>
+                    
+                    <h3>Group Discussion Activities</h3>
+                    
+                    <div class="tip-box">
+                        <h4>Group Activity 1: Systems Café (45 minutes)</h4>
+                        <p><strong>Setup:</strong> Small groups rotate through different tables, each focused on a different systems principle</p>
+                        <p><strong>Process:</strong></p>
+                        <ul>
+                            <li>Table 1: Interconnectedness - How are our current challenges connected?</li>
+                            <li>Table 2: Purpose - What is our system actually designed to achieve?</li>
+                            <li>Table 3: Structure - What structures might be driving current outcomes?</li>
+                            <li>Table 4: Mental Models - What assumptions might be limiting our thinking?</li>
+                            <li>Table 5: Leverage Points - Where might small changes have big impacts?</li>
+                        </ul>
+                        <p><strong>Debrief:</strong> What insights emerged across tables? What patterns did you notice?</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>Group Activity 2: Perspective Taking (30 minutes)</h4>
+                        <p><strong>Purpose:</strong> Expand perspective and challenge assumptions</p>
+                        <p><strong>Process:</strong></p>
+                        <ol>
+                            <li>Present a policy challenge to the group</li>
+                            <li>Assign different stakeholder perspectives to small groups</li>
+                            <li>Each group discusses the challenge from their assigned perspective</li>
+                            <li>Groups present their perspective to others</li>
+                            <li>Full group discusses what they learned</li>
+                        </ol>
+                        <p><strong>Debrief:</strong> What perspectives were missing from our usual discussions? How might this change our approach?</p>
+                    </div>
+                    
+                    <h3>Case Study Exercises</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Case Study Template: Systems Analysis</h4>
+                        <p><strong>Step 1:</strong> Present the challenge or policy issue</p>
+                        <p><strong>Step 2:</strong> Map the key stakeholders and their relationships</p>
+                        <p><strong>Step 3:</strong> Identify the patterns and recurring themes</p>
+                        <p><strong>Step 4:</strong> Explore underlying structures and mental models</p>
+                        <p><strong>Step 5:</strong> Identify potential leverage points</p>
+                        <p><strong>Step 6:</strong> Consider unintended consequences of interventions</p>
+                        <p><strong>Debrief:</strong> How does this analysis compare to traditional approaches? What new insights emerged?</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="discussions">
+                    <h2>Discussion Points for Workshops</h2>
+                    
+                    <h3>Opening Discussion Questions</h3>
+                    <ul>
+                        <li>Think of a time when a good intention led to an unexpected outcome. What happened and why?</li>
+                        <li>What's an example of a problem that keeps coming back despite repeated attempts to fix it?</li>
+                        <li>When have you seen a small change create a disproportionately large impact?</li>
+                        <li>What's a policy area where different departments seem to be working at cross-purposes?</li>
+                    </ul>
+                    
+                    <h3>Mid-Session Discussion Points</h3>
+                    
+                    <h4>On Interconnectedness:</h4>
+                    <ul>
+                        <li>How do housing policies affect education outcomes?</li>
+                        <li>What connections do you see between your department's work and others?</li>
+                        <li>When has a solution in one area created problems elsewhere?</li>
+                    </ul>
+                    
+                    <h4>On Mental Models:</h4>
+                    <ul>
+                        <li>What assumptions do we make about why people behave as they do?</li>
+                        <li>How might our organisational culture shape what we see as possible?</li>
+                        <li>What would someone from outside government see that we might miss?</li>
+                    </ul>
+                    
+                    <h4>On Systems Leadership:</h4>
+                    <ul>
+                        <li>What does leadership look like when you can't control all the variables?</li>
+                        <li>How do you influence a system you're part of?</li>
+                        <li>When is it appropriate to slow down and when to speed up?</li>
+                    </ul>
+                    
+                    <h3>Challenging Questions for Advanced Groups</h3>
+                    <ul>
+                        <li>How might our current performance measurement systems encourage the problems we're trying to solve?</li>
+                        <li>What would it mean to design policies that get better over time rather than delivering fixed outcomes?</li>
+                        <li>How do we balance accountability with the recognition that outcomes emerge from complex interactions?</li>
+                        <li>What if the "beneficiaries" of our policies were the primary designers of solutions?</li>
+                    </ul>
+                    
+                    <h3>Closing Reflection Questions</h3>
+                    <ul>
+                        <li>What's one assumption you're willing to question after today's discussion?</li>
+                        <li>Where do you see the biggest opportunity to apply systems thinking in your current work?</li>
+                        <li>What would you need to do differently as a leader to work more systemically?</li>
+                        <li>Who would you need to have different conversations with to understand your system better?</li>
+                    </ul>
+                </section>
+
+                <section class="content-section" id="reflection">
+                    <h2>Reflection Questions for Development</h2>
+                    
+                    <h3>Self-Assessment Questions</h3>
+                    
+                    <h4>Systems Awareness</h4>
+                    <ul>
+                        <li>Do I regularly consider how my actions might affect other parts of the organisation or system?</li>
+                        <li>When problems recur, do I look for patterns or focus on individual incidents?</li>
+                        <li>Am I curious about why systems produce their current outcomes?</li>
+                        <li>Do I see connections between seemingly separate issues?</li>
+                    </ul>
+                    
+                    <h4>Collaborative Leadership</h4>
+                    <ul>
+                        <li>Do I actively seek out perspectives different from my own?</li>
+                        <li>Am I comfortable sharing power and control to achieve better outcomes?</li>
+                        <li>Do I build relationships across organisational boundaries?</li>
+                        <li>Can I facilitate productive conversations between people with conflicting views?</li>
+                    </ul>
+                    
+                    <h4>Adaptive Capacity</h4>
+                    <ul>
+                        <li>How comfortable am I with ambiguity and uncertainty?</li>
+                        <li>Do I treat failures as learning opportunities or problems to avoid?</li>
+                        <li>Am I willing to experiment with new approaches?</li>
+                        <li>Do I adjust my approach based on feedback and results?</li>
+                    </ul>
+                    
+                    <h4>Long-term Orientation</h4>
+                    <ul>
+                        <li>Do I consider the long-term consequences of short-term decisions?</li>
+                        <li>Am I willing to invest time in building system capacity even when benefits aren't immediate?</li>
+                        <li>Do I think about how current decisions might affect future generations?</li>
+                        <li>Can I balance urgency with sustainability?</li>
+                    </ul>
+                    
+                    <h4>Reflective Practice</h4>
+                    <ul>
+                        <li>Do I regularly examine my own role in creating the outcomes I see?</li>
+                        <li>Am I open to feedback that challenges my approach?</li>
+                        <li>Do I question my own assumptions and mental models?</li>
+                        <li>Am I committed to continuous learning and development?</li>
+                    </ul>
+                    
+                    <h3>Deeper Reflection Questions</h3>
+                    
+                    <div class="tip-box">
+                        <h4>Weekly Reflection</h4>
+                        <ul>
+                            <li>What patterns did I notice in my work this week?</li>
+                            <li>Where did I see evidence of interconnectedness?</li>
+                            <li>What assumptions guided my decisions?</li>
+                            <li>Who did I not include in important conversations?</li>
+                            <li>What feedback did the system give me about my actions?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>Monthly Review</h4>
+                        <ul>
+                            <li>What systems patterns am I beginning to recognize in my area of work?</li>
+                            <li>How has my understanding of key challenges evolved?</li>
+                            <li>What new relationships have I built and why do they matter?</li>
+                            <li>Where have I seen small changes create larger impacts?</li>
+                            <li>What do I need to learn more about to be more effective?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>Quarterly Deep Dive</h4>
+                        <ul>
+                            <li>How has my role in the system changed over the past quarter?</li>
+                            <li>What mental models have I challenged or changed?</li>
+                            <li>Where have I been most and least successful in working systemically?</li>
+                            <li>What would colleagues say about how I've developed as a systems leader?</li>
+                            <li>What's my next learning edge in systems thinking?</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Team Reflection Questions</h3>
+                    
+                    <h4>For Team Meetings</h4>
+                    <ul>
+                        <li>What patterns are we seeing across our different work streams?</li>
+                        <li>Where are we working in silos when we should be connecting?</li>
+                        <li>What assumptions are guiding our team's approach?</li>
+                        <li>How are our actions affecting other parts of the organisation?</li>
+                        <li>What feedback is the system giving us about our effectiveness?</li>
+                    </ul>
+                    
+                    <h4>For Project Reviews</h4>
+                    <ul>
+                        <li>What did we learn about the system through this project?</li>
+                        <li>Where did we see unintended consequences?</li>
+                        <li>What connections did we discover that we hadn't anticipated?</li>
+                        <li>How did our mental models change through this work?</li>
+                        <li>What would we do differently with our current understanding?</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h3>Making Reflection Practical</h3>
+                        <p><strong>Start small:</strong> Choose just one or two questions that resonate with you and use them consistently.</p>
+                        <p><strong>Make it routine:</strong> Build reflection into existing meetings and processes rather than creating separate activities.</p>
+                        <p><strong>Share insights:</strong> Discussing your reflections with trusted colleagues often deepens the learning.</p>
+                        <p><strong>Focus on learning:</strong> The goal is insight and growth, not perfect answers.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButtons = document.querySelectorAll('.menu-button');
+            const submenuItems = document.querySelectorAll('.submenu-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Handle main menu toggles
+            menuButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const toggleTarget = this.dataset.toggle;
+                    const section = this.dataset.section;
+                    
+                    if (toggleTarget) {
+                        // Toggle submenu
+                        const submenu = document.getElementById(toggleTarget);
+                        const isActive = submenu.classList.contains('active');
+                        
+                        // Close all submenus
+                        document.querySelectorAll('.submenu').forEach(menu => {
+                            menu.classList.remove('active');
+                        });
+                        
+                        // Toggle current submenu
+                        if (!isActive) {
+                            submenu.classList.add('active');
+                        }
+                        
+                        // Update button appearance
+                        menuButtons.forEach(btn => btn.classList.remove('active'));
+                        if (!isActive) {
+                            this.classList.add('active');
+                        }
+                    } else if (section) {
+                        // Direct section navigation
+                        showSection(section);
+                        updateActiveStates(this, null);
+                    }
+                });
+            });
+            
+            // Handle submenu item clicks
+            submenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    showSection(section);
+                    updateActiveStates(null, this);
+                });
+            });
+            
+            function showSection(sectionId) {
+                // Hide all sections
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    updateProgress(sectionId);
+                }
+            }
+            
+            function updateActiveStates(activeButton, activeSubmenuItem) {
+                // Update menu button states
+                menuButtons.forEach(btn => btn.classList.remove('active'));
+                submenuItems.forEach(item => item.classList.remove('active'));
+                
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+                
+                if (activeSubmenuItem) {
+                    activeSubmenuItem.classList.add('active');
+                    // Also highlight parent menu
+                    const parentSubmenu = activeSubmenuItem.closest('.submenu');
+                    const parentButton = document.querySelector(`[data-toggle="${parentSubmenu.id}"]`);
+                    if (parentButton) {
+                        parentButton.classList.add('active');
+                    }
+                }
+            }
+            
+            function updateProgress(sectionId) {
+                // Simple progress calculation based on section
+                const sections = [
+                    'overview', 'what-is-systems', 'why-matters', 'key-principles',
+                    'perspective', 'connections', 'mental-models',
+                    'attributes', 'development', 'pitfalls',
+                    'activities', 'discussions', 'reflection'
+                ];
+                
+                const currentIndex = sections.indexOf(sectionId);
+                const progress = ((currentIndex + 1) / sections.length) * 100;
+                progressBar.style.width = `${Math.min(progress, 100)}%`;
+            }
+            
+            // Initialize with overview section
+            updateProgress('overview');
+        });
+        
+        // Add smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
